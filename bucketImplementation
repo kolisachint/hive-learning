@@ -1,14 +1,9 @@
 -- TO IMPLEMENT BUCKETING IN HIVE
 
-CREATE TABLE emp_bucketed(id INT, name STRING)
-PARTITIONED BY(dept STRING)
-CLUSTERED BY(id) INTO 3 BUCKETS;
+CREATE TABLE emp_bucketed (id INT, name STRING)
+  CLUSTERED BY (id) INTO 3 BUCKETS;
 
 set hive.enforce.bucketing = true;
 
-FROM id
 INSERT OVERWRITE TABLE emp_bucketed
-PARTITION (dept=10)
-SELECT id, name WHERE dept=10;
-
--- STILL TO COMPLETE
+  SELECT id, name FROM empDetails;
