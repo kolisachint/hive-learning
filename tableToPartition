@@ -14,3 +14,9 @@ CREATE TABLE empPartitioned (id INT, name STRING)
   PARTITIONED BY (deptid INT)
   ROW FORMAT DELIMITED
     FIELDS TERMINATED BY ',';
+
+-- Insert data from unpartitioned table to partitioned table
+INSERT OVERWRITE TABLE empPartitioned
+  PARTITION(deptid)
+  SELECT id,name,deptid
+    FROM empDetails;
