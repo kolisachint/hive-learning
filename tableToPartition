@@ -17,6 +17,13 @@ CREATE TABLE empPartitioned (id INT, name STRING)
 
 -- Insert data from unpartitioned table to partitioned table
 INSERT OVERWRITE TABLE empPartitioned
-  PARTITION(deptid)
-  SELECT id,name,deptid
-    FROM empDetails;
+  PARTITION(deptid=10)
+  SELECT id,name
+    FROM empDetails
+    WHERE deptid = 10;
+
+ERROR/ ISSUE:
+Query ID = root_20150628130021_d107e711-357f-4247-a47e-762c3e6ce952
+Total jobs = 3
+Launching Job 1 out of 3
+Number of reduce tasks is set to 0 since there's no reduce operator
