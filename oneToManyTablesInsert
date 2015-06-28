@@ -1,8 +1,10 @@
--- Insert Master Table
+-- Create Master Table
 CREATE TABLE empDetails
 (id INT, name STRING, deptid INT)
 ROW FORMAT DELIMITED
 FIELD TERMINATED BY ',';
+
+-- Create Sub Tables
 
 CREATE TABLE emp10
 (id INT, name STRING)
@@ -23,3 +25,22 @@ CREATE TABLE emp40
 (id INT, name STRING)
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY ',';
+
+-- Insert From empDetails to Subtables
+FROM empDetails
+  INSERT OVERWRITE TABLE emp10
+  SELECT id, name
+    WHERE deptid=10
+  INSERT OVERWRITE TABLE emp20
+  SELECT id, name
+    WHERE deptid=20
+  INSERT OVERWRITE TABLE emp30
+  SELECT id, name
+    WHERE deptid=30
+  INSERT OVERWRITE TABLE emp40
+  SELECT id, name
+    WHERE deptid=40;
+Query ID = root_20150628133621_30a97738-6fdc-4c6d-ba8c-faa834ed61f3
+Total jobs = 3
+Launching Job 1 out of 3
+Number of reduce tasks is set to 0 since there's no reduce operator
