@@ -1,6 +1,10 @@
--- HiveQL to write data from a table to a partition
+-- HiveQLs to write data from a table to a partition
 
+-- Create table empDetails
 CREATE TABLE empDetails (id INT, name STRING, deptid INT)
   ROW FORMAT DELIMITED
     FIELDS TERMINATED BY ',';
 
+-- Populate the table
+LOAD DATA INPATH '/cloudwick/hive/empDetails'
+  INTO TABLE empDetails;
