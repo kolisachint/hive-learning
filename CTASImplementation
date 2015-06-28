@@ -1,0 +1,12 @@
+-- Implement CTAS Query
+
+CREATE TABLE empDept10
+  AS
+  SELECT id, name
+    FROM empDetails
+    WHERE deptid = 10;
+
+Query ID = root_20150628132304_4ac6ae5c-f470-427d-9619-96b3a40c4111
+Total jobs = 3
+Launching Job 1 out of 3
+Number of reduce tasks is set to 0 since there's no reduce operator
