@@ -1,1 +1,5 @@
 -- HiveQL to write data from a table to a partition
+
+create table empDetails (id int, name string, deptid int)
+  ROW FORMAT DELIMITED
+    FIELDS TERMINATED BY ',';
