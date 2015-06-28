@@ -5,6 +5,12 @@ CREATE TABLE empDetails (id INT, name STRING, deptid INT)
   ROW FORMAT DELIMITED
     FIELDS TERMINATED BY ',';
 
--- Populate the table
+-- Populate the table with data in HDFS
 LOAD DATA INPATH '/cloudwick/hive/empDetails'
   INTO TABLE empDetails;
+
+-- Create Table empPartitioned for storing data in Partitioned format
+CREATE TABLE empPartitioned (id INT, name STRING)
+  PARTITIONED BY (deptid INT)
+  ROW FORMAT DELIMITED
+    FIELDS TERMINATED BY ',';
