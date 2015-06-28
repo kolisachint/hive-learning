@@ -1,0 +1,8 @@
+-- Export hive table to Local File System
+INSERT OVERWRITE LOCAL DIRECTORY '/root/cloudwick/xyz.txt' SELECT * FROM empDetails;
+
+-- ISSUE / ERROR
+Query ID = root_20150628131752_fe006eba-1029-4de2-a8a0-9b3f8764a463
+Total jobs = 1
+Launching Job 1 out of 1
+Number of reduce tasks is set to 0 since there's no reduce operator
