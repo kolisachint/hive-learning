@@ -1,8 +1,19 @@
 -- Export hive table to Local File System
-INSERT OVERWRITE DIRECTORY '/root/cloudwick/xyz.txt' SELECT * FROM empDetails;
+INSERT OVERWRITE DIRECTORY '/cloudwick/empDump.csv'
+  SELECT id, name, deptid FROM empDetails;
 
 -- ISSUE / ERROR
-Query ID = root_20150628131752_fe006eba-1029-4de2-a8a0-9b3f8764a463
-Total jobs = 1
-Launching Job 1 out of 1
+Query ID = root_20150629002916_6609623f-9bf6-471a-bd67-4dcedfe28008
+Total jobs = 3
+Launching Job 1 out of 3
 Number of reduce tasks is set to 0 since there's no reduce operator
+Starting Job = job_1435559939015_0007, Tracking URL = http://pseudohadoop:8088/proxy/application_1435559939015_0007/
+Kill Command = /usr/local/hadoop/default/bin/hadoop job  -kill job_1435559939015_0007
+Hadoop job information for Stage-1: number of mappers: 0; number of reducers: 0
+2015-06-29 00:29:25,540 Stage-1 map = 0%,  reduce = 0%
+Ended Job = job_1435559939015_0007 with errors
+Error during job, obtaining debugging information...
+FAILED: Execution Error, return code 2 from org.apache.hadoop.hive.ql.exec.mr.MapRedTask
+MapReduce Jobs Launched: 
+Stage-Stage-1:  HDFS Read: 0 HDFS Write: 0 FAIL
+Total MapReduce CPU Time Spent: 0 msec
