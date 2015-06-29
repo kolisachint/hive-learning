@@ -1,5 +1,5 @@
 -- Export hive table to Local File System
-INSERT OVERWRITE LOCAL DIRECTORY '/root/cloudwick/xyz.txt' SELECT * FROM empDetails;
+INSERT OVERWRITE DIRECTORY '/root/cloudwick/xyz.txt' SELECT * FROM empDetails;
 
 -- ISSUE / ERROR
 Query ID = root_20150628131752_fe006eba-1029-4de2-a8a0-9b3f8764a463
