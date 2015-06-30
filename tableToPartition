@@ -22,8 +22,39 @@ INSERT OVERWRITE TABLE empPartitioned
     FROM empDetails
     WHERE deptid = 10;
 
+-- Insert data from unpartitioned table to partitioned table
+INSERT OVERWRITE TABLE empPartitioned
+  PARTITION(deptid=20)
+  SELECT id,name
+    FROM empDetails
+    WHERE deptid = 20;
+
+-- Insert data from unpartitioned table to partitioned table
+INSERT OVERWRITE TABLE empPartitioned
+  PARTITION(deptid=30)
+  SELECT id,name
+    FROM empDetails
+    WHERE deptid = 30;
+
+-- Insert data from unpartitioned table to partitioned table
+INSERT OVERWRITE TABLE empPartitioned
+  PARTITION(deptid=40)
+  SELECT id,name
+    FROM empDetails
+    WHERE deptid = 40;
+    
 ERROR/ ISSUE:
-Query ID = root_20150628130021_d107e711-357f-4247-a47e-762c3e6ce952
+Query ID = root_20150630011004_47690a1f-a502-490e-8f5c-6462875b7ace
 Total jobs = 3
 Launching Job 1 out of 3
 Number of reduce tasks is set to 0 since there's no reduce operator
+Starting Job = job_1435626571104_0008, Tracking URL = http://pseudohadoop:8088/proxy/application_1435626571104_0008/
+Kill Command = /usr/local/hadoop/default/bin/hadoop job  -kill job_1435626571104_0008
+Hadoop job information for Stage-1: number of mappers: 0; number of reducers: 0
+2015-06-30 01:10:10,325 Stage-1 map = 0%,  reduce = 0%
+Ended Job = job_1435626571104_0008 with errors
+Error during job, obtaining debugging information...
+FAILED: Execution Error, return code 2 from org.apache.hadoop.hive.ql.exec.mr.MapRedTask
+MapReduce Jobs Launched: 
+Stage-Stage-1:  HDFS Read: 0 HDFS Write: 0 FAIL
+Total MapReduce CPU Time Spent: 0 msec
