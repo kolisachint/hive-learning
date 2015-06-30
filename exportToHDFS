@@ -3,15 +3,15 @@ INSERT OVERWRITE DIRECTORY '/cloudwick/empDump.csv'
   SELECT id, name, deptid FROM empDetails;
 
 -- ISSUE / ERROR
-Query ID = root_20150629002916_6609623f-9bf6-471a-bd67-4dcedfe28008
+Query ID = root_20150629181106_0e59ee08-e764-4e3c-887f-6c0e3ae2ba30
 Total jobs = 3
 Launching Job 1 out of 3
 Number of reduce tasks is set to 0 since there's no reduce operator
-Starting Job = job_1435559939015_0007, Tracking URL = http://pseudohadoop:8088/proxy/application_1435559939015_0007/
-Kill Command = /usr/local/hadoop/default/bin/hadoop job  -kill job_1435559939015_0007
+Starting Job = job_1435626571104_0001, Tracking URL = http://pseudohadoop:8088/proxy/application_1435626571104_0001/
+Kill Command = /usr/local/hadoop/default/bin/hadoop job  -kill job_1435626571104_0001
 Hadoop job information for Stage-1: number of mappers: 0; number of reducers: 0
-2015-06-29 00:29:25,540 Stage-1 map = 0%,  reduce = 0%
-Ended Job = job_1435559939015_0007 with errors
+2015-06-29 18:11:19,446 Stage-1 map = 0%,  reduce = 0%
+Ended Job = job_1435626571104_0001 with errors
 Error during job, obtaining debugging information...
 FAILED: Execution Error, return code 2 from org.apache.hadoop.hive.ql.exec.mr.MapRedTask
 MapReduce Jobs Launched: 
