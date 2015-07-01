@@ -1,5 +1,8 @@
+-- Use dynamic partitioning to load data from one table
+-- and dynamically load data to multiple partitions.
+
 -- Originally existing table
-CREATE TABLE emp (id INT, name STRING, deptid INT)
+CREATE TABLE empDetails (id INT, name STRING, deptid INT)
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY ',';
 
@@ -9,9 +12,16 @@ CREATE TABLE emp_partitioned (id INT, name STRING)
   ROW FORMAT DELIMITED
   FIELDS TERMINATED BY ',';
 
+-- If this is not set to strict, then atleast
+-- one partition needs to be created
+set hive.exec.dynamic.partition.mode=nonstrict
+
 -- Insert data into original table
+LOAD DATA INPATH '/cloudwick/data/empData'
+INTO TABLE empDetails;
+
 -- Read data and insert into the partitioned table
 INSERT INTO TABLE emp_partitioned
-	PARTITION (deptid)
-    SELECT  id, name, deptid   
-	  FROM emp;
+  PARTITION (deptid)
+  SELECT  id, name, deptid
+    FROM empDetails;
