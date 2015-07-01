@@ -1,1 +1,17 @@
+-- Originally existing table
+CREATE TABLE emp (id INT, name STRING, deptid INT)
+ROW FORMAT DELIMITED
+FIELDS TERMINATED BY ',';
 
+-- Create new table for dynamically partitioning data
+CREATE TABLE emp_partitioned (id INT, name STRING)
+  PARTITIONED BY (deptid INT)
+  ROW FORMAT DELIMITED
+  FIELDS TERMINATED BY ',';
+
+-- Insert data into original table
+-- Read data and insert into the partitioned table
+INSERT INTO TABLE emp_partitioned
+	PARTITION (deptid)
+    SELECT  id, name, deptid   
+	  FROM emp;
