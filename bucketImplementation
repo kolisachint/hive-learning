@@ -1,9 +1,41 @@
--- TO IMPLEMENT BUCKETING IN HIVE
+-- To implement bucketing in hive
 
-CREATE TABLE emp_bucketed (id INT, name STRING)
-  CLUSTERED BY (id) INTO 3 BUCKETS;
+CREATE TABLE emp_bucketed (id INT, name STRING, deptid INT)
+  CLUSTERED BY (deptid) INTO 40 BUCKETS;
 
 set hive.enforce.bucketing = true;
 
 INSERT OVERWRITE TABLE emp_bucketed
-  SELECT id, name FROM empDetails;
+  SELECT id, name, deptid FROM empDetails;
+
+-- Understanding sampling on Bucketed tables
+-- After inserting data, number of files created
+-- will be equal to the specified number of buckets
+SELECT * FROM emp_bucketed
+  TABLESAMPLE (BUCKET 11 OUT OF 40 ON deptid);
+
+CREATE TABLE dept (deptid INT, dname STRING)
+  ROW FORMAT DELIMITED
+  FIELDS TERMINATED BY ',';
+
+LOAD DATA INPATH '/cloudwick/data/deptData'
+  INTO TABLE dept;
+
+CREATE TABLE dept_bucketed (deptid INT, dname STRING)
+  CLUSTERED BY (deptid) INTO 40 BUCKETS;
+
+INSERT OVERWRITE TABLE dept_bucketed
+  SELECT deptid, dname FROM dept;
+
+-- Results of Join on Emp and Dept tables
+-- with and without bucketing
+
+-- Without Bucketing
+SELECT e.name, d.dname
+  FROM empDetails e JOIN dept d
+  ON (e.deptid = d.deptid);
+
+-- With Bucketing
+SELECT e.name, d.dname
+  FROM emp_bucketed e JOIN dept_bucketed d
+  ON (e.deptid = d.deptid);
