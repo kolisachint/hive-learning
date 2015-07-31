@@ -1,3 +1,5 @@
+-- Understanding how to create an updatable table
+
 CREATE TABLE updatable_emp (id INT, name VARCHAR(100))
   STORED AS orc
   TBLPROPERTIES('transactional'='true');
