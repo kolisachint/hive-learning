@@ -27,6 +27,10 @@ CREATE TABLE dept_bucketed (deptid INT, dname STRING)
 INSERT OVERWRITE TABLE dept_bucketed
   SELECT deptid, dname FROM dept;
 
+-- Check sampling. Let say there are total 40 differet deptid's
+SELECT * FROM dept_bucketed
+  TABLESAMPLE(BUCKET 3 OUT OF 40 on deptid)
+
 -- Results of Join on Emp and Dept tables
 -- with and without bucketing
 
