@@ -1,0 +1,9 @@
+CREATE TABLE updatable_emp (id INT, name VARCHAR(100))
+  STORED AS orc
+  TBLPROPERTIES('transactional'='true');
+
+INSERT INTO TABLE updatable_emp
+  SELECT id, name FROM emp WHERE id = 1 or id = 2;
+
+UPDATE updatable_emp SET name='jimmy' where id=1;
+DELETE FROM updatable_emp WHERE id=2;
